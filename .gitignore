@@ -1,0 +1,38 @@
+# Visual Studio
+.vs/
+*.sln.user
+*.suo
+*.user
+*.pdb
+*.sdf
+*.vssscc
+*.vspscc
+*.vssscc
+*.tmp
+*.log
+
+# Build Folders
+[Dd]ebug/
+[Rr]elease/
+**/bin/
+**/obj/
+_ReSharper.*/
+[Aa]pp_Data/
+.gitkeep
+
+# Nuget Packages
+*.nupkg
+.nuget/
+[Pp]ackages/
+/artifacts/
+
+# Node.js
+/node_modules/
+npm-debug.log
+
+# ASP.NET Core
+**/*.user
+.idea/
+
+# Windows
+[Tt]humbs.db

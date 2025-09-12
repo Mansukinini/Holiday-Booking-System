@@ -1,0 +1,247 @@
+﻿@model List<BookingSystem.Models.Booking>
+
+@{
+    ViewData["Title"] = "Holiday Booking System";
+}
+
+@* Add this script block to your Index.cshtml *@
+<script>
+    function toggleEdit(bookingId) {
+        var displayRow = document.getElementById('display-' + bookingId);
+        var editRow = document.getElementById('edit-' + bookingId);
+
+        if (displayRow.style.display === 'none') {
+            displayRow.style.display = '';
+            editRow.style.display = 'none';
+        } else {
+            displayRow.style.display = 'none';
+            editRow.style.display = '';
+        }
+    }
+
+    function calculateDays() {
+        // Get the values from the date input fields
+        const dateFromInput = document.getElementById('from-date').value;
+        const dateToInput = document.getElementById('to-date').value;
+        
+        
+        // Get the number of days input field
+        const numberOfDaysInput = document.getElementById('NumberOfDays');
+
+        // Check if both dates are selected
+        if (dateFromInput && dateToInput) {
+            // Convert the date strings to Date objects
+            const dateFrom = new Date(dateFromInput);
+            const dateTo = new Date(dateToInput);
+
+            // Calculate the difference in milliseconds
+            const differenceInTime = dateTo.getTime() - dateFrom.getTime();
+
+            // Calculate the difference in days
+            const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+            // Set the value of the input field
+            numberOfDaysInput.value = differenceInDays;
+        } else {
+            // Clear the input field if one or both dates are not selected
+            numberOfDaysInput.value = '';
+        }
+    }
+
+    function saveChanges(bookingId) {
+        // Get the form by its unique ID
+        const form = document.getElementById('edit-form-' + bookingId);
+        // Submit the form
+        form.submit();
+    }
+
+    function deleteBooking(bookingId) {
+        // Get the form by its unique ID
+        const form = document.getElementById('delete-form-' + bookingId);
+        // Submit the form
+        form.submit();
+    }
+</script>
+
+<h3>Holiday Booking System 🏖️</h3>
+
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; font: 12px !important; line-height: 1.3; }
+    .booking-form, .booking-list { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+    .booking-list table { width: 100%; border-collapse: collapse; }
+    .booking-list th, .booking-list td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    .booking-list .date-select { width: 132px;}
+    .booking-list button, .booking-list a { margin-left: 5px; }
+</style>
+
+<div class="booking-form">
+    <h4>Add New Booking</h4>
+    <form asp-controller="Booking" asp-action="Create" method="post">
+        <div class="row g-3">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" name="Name" placeholder="name" required />
+                    <label for="name">Name</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="surname" name="Surname" placeholder="surname" required/>
+                    <label for="surname">Surname</label>
+                </div>
+            </div>
+        </div>
+        <div class="row g-3">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email-address" name="Email" placeholder="name@example.com">
+                    <label for="email-address">Email address</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="contactNo" name="ContactNo" required placeholder="Contact No" />
+                    <label for="contactNo">Contact No</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="Item" placeholder="Item (e.g., apartment, car)" required>
+            <label for="floatingInput">Item (e.g., apartment, car)</label>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea type="text" class="form-control" name="Description" id="floatingTextarea" placeholder="Type your description"></textarea>
+          @* <textarea  name="Description" rows="4" cols="50"></textarea> *@
+          <label for="floatingTextarea">Description</label>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-5">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="from-date" name="FromDate" onchange="calculateDays()" placeholder="From date" required />
+                    <label for="from-Date">From Date:</label>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="to-date" name="ToDate" onchange="calculateDays()" placeholder="To date" required />
+                    <label for="to-date">To Date:</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="NumberOfDays" name="readonly" placeholder="NumberOfDays" readonly>
+                    <label for="NumberOfDays">Number of Days</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-sm">Add Booking</button>
+        </div>
+    </form>
+</div>
+
+<div class="booking-list">
+    <h4>Bookings</h4>
+    @if (Model.Any())
+    {
+        <div class="row g-3 themed-scrollbar">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 5px;">Reference</th>
+                        <th style="width: 5px;">Name</th>
+                        <th style="width: 5px;">Surname</th>
+                        <th style="width: 5px;">Email Address</th>
+                        <th style="width: 5px;">Contact No</th>
+                        <th style="width: 5px;">Item Booked</th>
+                        <th style="width: 5px;">Description</th>
+                        <th style="width: 5px;">From Date</th>
+                        <th style="width: 5px;">To Date</th>
+                        <th style="width: 5px;">No of Days</th>
+                        <th style="width: 4%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var booking in Model)
+                {
+                    // This is the read-only display row
+                    <tr id="display-@booking.Id">
+                        <td ><span>@booking.RefNo</span></td>
+                        <td ><span>@booking.Name</span></td>
+                        <td><span>@booking.Surname</span></td>
+                        <td><span>@booking.Email</span></td>
+                        <td><span>@booking.ContactNo</span></td>
+                        <td><span>@booking.Item</span></td>
+                        <td><span>@booking.Description</span></td>
+                        <td><span>@booking.FromDate.ToShortDateString()</span></td>
+                        <td><span>@booking.ToDate.ToShortDateString()</span></td>
+                        <td><span>@booking.NumberOfDays</span></td>
+                        <td>
+                            <span onclick="toggleEdit(@booking.Id)">
+                                <i class="bi bi-pencil-square" title="Edit"></i>
+                            </span>
+                            <form id="delete-form-@booking.Id" asp-controller="Booking" asp-action="Delete" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@booking.Id" />
+                                <span onclick="deleteBooking(@booking.Id)" style="cursor:pointer; color:red;">
+                                    <i class="bi bi-trash" title="Delete"></i>
+                                </span>
+                            </form>
+                        </td>
+                    </tr>
+
+                    // This is the inline edit row, initially hidden
+                    <tr id="edit-@booking.Id" style="display: none; position: relative;">
+                        <td style="width: 5px;">
+                            <input type="text" class="form-control" name="RefNo" value="@booking.RefNo" form="edit-form-@booking.Id" readonly />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="text" class="form-control" name="Name" value="@booking.Name" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="text" class="form-control" name="Surname" value="@booking.Surname" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="text" class="form-control" name="Email" value="@booking.Email" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="text" class="form-control" name="ContactNo" value="@booking.ContactNo" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="text" class="form-control" name="Item" value="@booking.Item" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            @* // TODO: Replace this input tag to textArea tag *@
+                            @* <textarea type="text" class="form-control" name="Description" value="@booking.Description" form="edit-form-@booking.Id"></textarea> *@
+                            <input type="text" class="form-control" name="Description" value="@booking.Description" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="date" class="form-control date-select" name="FromDate" value="@booking.FromDate.ToString("yyyy-MM-dd")" form="edit-form-@booking.Id" />
+                        </td>
+                        <td style="width: 5px;">
+                            <input type="date" class="form-control date-select" name="ToDate" value="@booking.ToDate.ToString("yyyy-MM-dd")" form="edit-form-@booking.Id" />
+                        </td> 
+                        <td style="width: 3px;">
+                            <input type="text" class="form-control" name="NumberOfDays" value="@booking.NumberOfDays" form="edit-form-@booking.Id" readonly/>
+                        </td>
+                        <td style="width: 5%;">
+                            <form id="edit-form-@booking.Id" asp-controller="Booking" asp-action="Edit" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@booking.Id" />
+                                <span onclick="saveChanges(@booking.Id)" style="cursor:pointer;">
+                                    <i class="bi bi-check-circle" title="Save"></i>
+                                </span>
+                            </form>
+                            <span onclick="toggleEdit(@booking.Id)" style="cursor:pointer;">
+                                <i class="bi bi-x-circle" title="Cancel"></i>
+                            </span>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>    
+        </div>        
+    }
+    else
+    {
+        <p>No bookings found.</p>
+    }
+</div>
