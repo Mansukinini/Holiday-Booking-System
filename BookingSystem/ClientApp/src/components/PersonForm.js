@@ -10,21 +10,17 @@ const PersonForm = ({ bookingDetails, onBookingAdded }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const result = {
+        const data = {
+            type: bookingDetails.type,
             refNo: null,
             dateFrom: new Date(bookingDetails.dateFrom).toISOString(),
             dateTo: new Date(bookingDetails.dateTo).toISOString(),
             people: { name, surname, contactNo, email },
-            bookings: {
-                type: bookingDetails.type,
-                dateFrom: new Date(bookingDetails.dateFrom).toISOString(),
-                dateTo: new Date(bookingDetails.dateTo).toISOString()
-            }
+            createdOn: new Date().toISOString()
         };
         
-        console.log('PersonForm bookingDetails:', result);
         try {
-            const response = await axios.post('/api/PersonBooking', result);
+            const response = await axios.post('/api/Bookings', data);
             onBookingAdded(response.data);
             setName('');
             setSurname('');

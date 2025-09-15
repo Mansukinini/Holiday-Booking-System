@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-const InquiryBooking = ({ bookingType, setBookingType, onBookingAdded }) => {
+const InquiryBooking = ({bookingTypes, onBookingAdded }) => {
     const [dateFrom, setDateFrom] = useState('');
-    const [dateTo, setDateTo] = useState('');
+    const [dateTo, setDateTo] = useState('');    
+    const [bookingType, setBookingType] = useState(null);
     
     const capturedates = (e) => {
         e.preventDefault();
@@ -10,12 +11,6 @@ const InquiryBooking = ({ bookingType, setBookingType, onBookingAdded }) => {
         
         onBookingAdded(newBooking);
     };
-
-    const bookingTypes = [
-        { id: 1, type: 'Apartment', description: 'Room Booking' },
-        { id: 2, type: 'Car', description: 'Equipment Booking' },
-        { id: 3, type: 'Show', description: 'Event Booking' },
-    ];
 
     return (
         <div className="div-section show">
@@ -26,11 +21,11 @@ const InquiryBooking = ({ bookingType, setBookingType, onBookingAdded }) => {
                 <div className="col-12">
                     { bookingTypes.map(item => (
                         <button
-                            key={item.id}
+                            key={item}
                             type="button"
-                            className={`btn btn-outline-secondary btn-pill ${bookingType === item.type ? 'active' : ''}`}
-                            onClick={() => setBookingType(item.type)}>
-                            {item.type}
+                            className={`btn btn-outline-secondary btn-pill ${bookingType === item ? 'active' : ''}`}
+                            onClick={() => setBookingType(item)}>
+                            {item}
                         </button>
                     ))}
                 </div>

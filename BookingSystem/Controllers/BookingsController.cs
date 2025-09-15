@@ -1,43 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BookingSystem.Models;
-using System.Collections.Generic;
-using System.Linq;
 using BookingSystem.Repositories;
 
 [ApiController]
 [Route("api/[controller]")]
 public class BookingsController : ControllerBase
 {
-    private static PersonBooking personBooking = new PersonBooking();
-    private static readonly List<PersonBooking> _personBookings = new List<PersonBooking>();
     private static List<Booking> _bookings = new List<Booking>();
 
     // GET: api/bookings
     [HttpGet]
     public IActionResult Get()
     {
-        _bookings = new List<Booking>() {
-            
-        };
-
         return Ok(_bookings);
     }
-        
+
+    // GET: api/bookings
+    [HttpGet("bookingType")]
+    public IActionResult GetBookingType()
+    {
+        return Ok(BookingType.bookingTypesList);
+    }
+
     // POST: api/bookings
     [HttpPost]
     public IActionResult Post([FromBody] Booking booking)
     {
         if (ModelState.IsValid)
         {
-            booking.Id = Guid.NewGuid();
-            booking.CreatedOn = DateTime.Now;
-            personBooking.Id = Guid.NewGuid();
-            personBooking.RefNo = BookingRepository.GenerateRefNo(_personBookings);
-            personBooking.DateFrom = booking.DateFrom;
-            personBooking.DateTo = booking.DateTo;
-            personBooking.Bookings = booking;
-
-            _bookings.Add(booking);
+            _bookings.Add(BookingRepository.GetBooking(_bookings, booking));
             return CreatedAtAction(nameof(Get), new { id = booking.Id }, booking);
         }
 
@@ -55,8 +46,11 @@ public class BookingsController : ControllerBase
         }
 
         existingBooking.Type = updatedBooking.Type;
+        existingBooking.RefNo = updatedBooking.RefNo;
         existingBooking.DateFrom = updatedBooking.DateFrom;
         existingBooking.DateTo = updatedBooking.DateTo;
+        existingBooking.People = updatedBooking.People;
+        existingBooking.CreatedOn = updatedBooking.CreatedOn;
 
         return NoContent();
     }

@@ -7,7 +7,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/PersonBooking/${id}`);
+            await axios.delete(`/api/Bookings/${id}`);
             onBookingDeleted();
         } catch (error) {
             console.error('Error deleting booking:', error);
@@ -22,7 +22,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
             surname: booking.people.surname,
             email: booking.people.email,
             contactNo: booking.people.contactNo,
-            type: booking.bookings.type,
+            type: booking.type,
             dateFrom: booking.dateFrom.slice(0, 10),
             dateTo: booking.dateTo.slice(0, 10)
         });
@@ -37,22 +37,18 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
         const updatedBooking = {
             id,
             refNo: editData.refNo,
+            type: editData.type,
+            dateFrom: new Date(editData.dateFrom).toISOString(),
+            dateTo: new Date(editData.dateTo).toISOString(),
             people: {
                 name: editData.name,
                 surname: editData.surname,
                 email: editData.email,
                 contactNo: editData.contactNo
-            },
-            bookings: {
-                type: editData.type,
-                dateFrom: new Date(editData.dateFrom).toISOString(),
-                dateTo: new Date(editData.dateTo).toISOString()
-            },
-            dateFrom: new Date(editData.dateFrom).toISOString(),
-            dateTo: new Date(editData.dateTo).toISOString()
+            }
         };
         try {
-            await axios.put(`/api/PersonBooking/${id}`, updatedBooking);
+            await axios.put(`/api/Bookings/${id}`, updatedBooking);
             setEditId(null);
             setEditData({});
             onBookingDeleted();
@@ -165,7 +161,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                                     <td>{booking.people.surname}</td>
                                     <td>{booking.people.email}</td>
                                     <td>{booking.people.contactNo}</td>
-                                    <td>{booking.bookings.type}</td>
+                                    <td>{booking.type}</td>
                                     <td>{new Date(booking.dateFrom).toLocaleDateString()}</td>
                                     <td>{new Date(booking.dateTo).toLocaleDateString()}</td>
                                     <td>{booking.numberOfDays}</td>

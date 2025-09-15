@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BookingSystem.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 [ApiController]
 [Route("api/[controller]")]
 public class PeopleController : ControllerBase
 {
     private static List<Person> _peoples = new List<Person>();
-    private static readonly List<PersonBooking> _personBookings = new List<PersonBooking>();
 
     // GET: api/People
     [HttpGet]
