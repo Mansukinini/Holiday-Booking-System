@@ -1,0 +1,98 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.heading {
+    color: #428bca;
+    margin: 20px 0;
+}
+
+.sub-heading {
+    color: #1e1e1e !important;
+    font-size: 18px;
+    display: inline-block;
+    position: relative;
+    font-weight: 500;
+}
+
+.div-section {
+    display: none;
+}
+
+.div-section.show {
+    display: block;
+    animation: fadeDownFromNone 0.5s ease-out;
+}
+
+.section-row {
+    border: 2px solid #428bca6b;
+    margin: 20px 50px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.btn-pill {
+    border-color: #428bca;
+    border-radius: 15px;
+    margin: 5px 2px;
+    font-size: 13px;
+}
+
+.btn-pill:hover,
+.btn-square:hover {
+    background-color: #428bca;
+}
+
+.btn-pill:not(:disabled):not(.disabled).active:focus, .btn-pill:not(:disabled):not(.disabled):active:focus,
+.show>.btn-pill.dropdown-toggle:focus, .btn-pill.focus, .btn-pill:focus,
+.btn-square:not(:disabled):not(.disabled).active:focus, .btn-square:not(:disabled):not(.disabled):active:focus,
+.show>.btn-square.dropdown-toggle:focus, .btn-square.focus, .btn-square:focus {
+    box-shadow: 0 0 0 .2rem rgba(65, 155, 233, 0.5) !important;
+}
+
+.btn-pill:not(:disabled):not(.disabled).active, .btn-pill:not(:disabled):not(.disabled):active, .show>.btn-pill.dropdown-toggle,
+.btn-square:not(:disabled):not(.disabled).active, .btn-square:not(:disabled):not(.disabled):active, .show>.btn-square.dropdown-toggle {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+tbody> tr>td>label {
+  margin-top: 8px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

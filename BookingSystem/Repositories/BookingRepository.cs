@@ -1,16 +1,46 @@
 ﻿using BookingSystem.Models;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace BookingSystem.Repositories
 {
     public class BookingRepository
     {
-        public static string GenerateRefNo(List<Booking> booking) {
+        public static PersonBooking GetPersonBooked(PersonBooking personBooking, List<PersonBooking> personbookingList)
+        {
+            personBooking.People = new Person
+            {
+                Id = Guid.NewGuid(),
+                Name = personBooking.People?.Name,
+                Surname = personBooking.People?.Surname,
+                Email = personBooking.People?.Email,
+                ContactNo = personBooking.People?.ContactNo,
+            };
+
+            personBooking.Bookings = new Booking
+            {
+                Id = Guid.NewGuid(),
+                Type = personBooking.Bookings?.Type,
+                DateFrom = personBooking.DateFrom,
+                DateTo = personBooking.DateTo
+            };
+
+            personBooking.Id = Guid.NewGuid();
+            personBooking.RefNo = BookingRepository.GenerateRefNo(personbookingList);
+            personBooking.PersonId = personBooking.People.Id;
+            personBooking.BookingId = personBooking.Bookings.Id;
+            personBooking.DateFrom = personBooking.Bookings.DateFrom;
+            personBooking.DateTo = personBooking.Bookings.DateTo;
+
+            return personBooking;
+        } 
+
+        public static string GenerateRefNo(List<PersonBooking> PersonBooking) {
             string newRefNo = string.Empty;
             string yearMonth = DateTime.Now.ToString("yyyy-MM");
             int numPadding = 4;
 
-            var refNo = booking.Select(x => x.RefNo).OrderByDescending(x => x).FirstOrDefault();
+            var refNo = PersonBooking.Select(x => x.RefNo).OrderByDescending(x => x).FirstOrDefault();
 
             var latestRefNo = refNo ?? yearMonth;
 
