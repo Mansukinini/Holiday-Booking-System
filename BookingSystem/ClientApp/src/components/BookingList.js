@@ -65,7 +65,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
     };
 
     return (
-        <div>
+        <div className="row">
             <h3 className="heading">Existing Bookings</h3>
             <table className='table table-striped table-hover'>
                 <thead>
