@@ -16,6 +16,10 @@ public class BookingsController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
+        _bookings = new List<Booking>() {
+            
+        };
+
         return Ok(_bookings);
     }
         

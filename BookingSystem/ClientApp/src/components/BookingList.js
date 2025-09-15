@@ -17,6 +17,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
     const handleEditClick = (booking) => {
         setEditId(booking.id);
         setEditData({
+            refNo: booking.refNo,
             name: booking.people.name,
             surname: booking.people.surname,
             email: booking.people.email,
@@ -35,6 +36,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
     const handleEditSave = async (id) => {
         const updatedBooking = {
             id,
+            refNo: editData.refNo,
             people: {
                 name: editData.name,
                 surname: editData.surname,
@@ -70,6 +72,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
             <table className='table table-striped table-hover'>
                 <thead>
                     <tr>
+                        <th>Reference No</th>
                         <th>Name</th>
                         <th>Surname</th>
                         <th>Email</th>
@@ -86,6 +89,14 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                         <tr key={booking.id}>
                             {editId === booking.id ? (
                                 <>
+                                    <td>
+                                        <input className="form-control"
+                                            name="refNo"
+                                            value={editData.refNo}
+                                            onChange={handleEditChange}
+                                            readOnly
+                                        />
+                                    </td>
                                     <td>
                                         <input className="form-control"
                                             name="name"
@@ -149,6 +160,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                                 </>
                             ) : (
                                 <>
+                                    <td>{booking.refNo}</td>
                                     <td>{booking.people.name}</td>
                                     <td>{booking.people.surname}</td>
                                     <td>{booking.people.email}</td>

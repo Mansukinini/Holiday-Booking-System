@@ -38,7 +38,7 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div className="App" style={{ margin: '20px' }}>
             <h3 className="heading">Holiday Booking System </h3>
             <InquiryBooking bookingType={bookingType} setBookingType={setBookingType} onBookingAdded={handleBookingAdded} />
 
