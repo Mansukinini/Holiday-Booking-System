@@ -8,7 +8,18 @@ const InquiryBooking = ({bookingTypes, onBookingAdded }) => {
     const capturedates = (e) => {
         e.preventDefault();
         const newBooking = { type: bookingType, dateFrom, dateTo };
-        
+        if (!bookingType) {
+            alert("Please select a booking type.");
+            return;
+        }
+        if (!dateFrom || !dateTo) {
+            alert("Please select both dates.");
+            return;
+        }
+        if (new Date(dateTo) < new Date(dateFrom)) {
+            alert("End date cannot be before start date.");
+            return;
+        }
         onBookingAdded(newBooking);
     };
 
@@ -34,10 +45,10 @@ const InquiryBooking = ({bookingTypes, onBookingAdded }) => {
                     <table className="table table-borderless" style={{ display: 'inline-block', width: 'auto' }}>
                         <tbody>
                             <tr>
-                                <td><label htmlFor="date-from">Date From</label></td>
-                                <td><input type="date" className="form-control" value={dateFrom} onChange={e => setDateFrom(e.target.value)} required /> </td>
-                                <td><label htmlFor="date-to">Date To</label></td>
-                                <td><input type="date" className="form-control" value={dateTo} onChange={e => setDateTo(e.target.value)} required /></td>
+                                <td><label htmlFor="dateFrom">Date From</label></td>
+                                <td><input type="date" htmlFor="dateFrom" className="form-control" value={dateFrom} onChange={e => setDateFrom(e.target.value)} required /> </td>
+                                <td><label htmlFor="dateTo">Date To</label></td>
+                                <td><input type="date" htmlFor="dateTo" className="form-control" value={dateTo} onChange={e => setDateTo(e.target.value)} required /></td>
                                 <td><button className="btn btn-outline-primary btn-square" onClick={capturedates}>Next</button>  </td>
                             </tr>
                         </tbody>
