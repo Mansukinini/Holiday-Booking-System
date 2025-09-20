@@ -1,17 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BookingSystem.Models;
-using BookingSystem.Repositories;
+using BookingSystem.Data.Repositories;
+using BookingSystem.Data.Interfaces;
 
 [ApiController]
 [Route("api/[controller]")]
 public class BookingsController : ControllerBase
 {
     private static List<Booking> _bookings = new List<Booking>();
+    /*private readonly IBookingRepository _bookingRepository;
+
+    public BookingsController(IBookingRepository bookingRepository)
+    {
+        _bookingRepository = bookingRepository;
+    }*/
 
     // GET: api/bookings
     [HttpGet]
     public IActionResult Get()
     {
+        //var bookings = _bookingRepository.GetAllBookings();
+        //return StatusCode(200, bookings);
         return Ok(_bookings);
     }
 
@@ -28,7 +37,7 @@ public class BookingsController : ControllerBase
     {
         if (ModelState.IsValid)
         {
-            _bookings.Add(BookingRepository.GetBooking(_bookings, booking));
+            _bookings.Add(BookingRepository.PostBooking(_bookings, booking));
             return CreatedAtAction(nameof(Get), new { id = booking.Id }, booking);
         }
 
@@ -39,20 +48,13 @@ public class BookingsController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult Put(Guid id, [FromBody] Booking updatedBooking)
     {
-        var existingBooking = _bookings.FirstOrDefault(b => b.Id == id);
-        if (existingBooking == null)
+        var result = BookingRepository.PutBooking(_bookings, id, updatedBooking);        
+        if (result == null)
         {
             return NotFound();
-        }
+        }        
 
-        existingBooking.Type = updatedBooking.Type;
-        existingBooking.RefNo = updatedBooking.RefNo;
-        existingBooking.DateFrom = updatedBooking.DateFrom;
-        existingBooking.DateTo = updatedBooking.DateTo;
-        existingBooking.People = updatedBooking.People;
-        existingBooking.CreatedOn = updatedBooking.CreatedOn;
-
-        return NoContent();
+        return StatusCode(200, result);
     }
 
     // DELETE: api/bookings/{id}
@@ -64,7 +66,7 @@ public class BookingsController : ControllerBase
         {
             return NotFound();
         }
-        _bookings.Remove(bookingToRemove);
-        return NoContent();
+        var result = _bookings.Remove(bookingToRemove);
+        return StatusCode(200, result);
     }
 }

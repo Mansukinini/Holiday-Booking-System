@@ -11,7 +11,7 @@ namespace BookingSystem.Models
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public int NumberOfDays => (int)(DateTo - DateFrom).TotalDays;
-        public Person? People { get; set; }
+        public Person People { get; set; } = null!;
         public DateTime CreatedOn { get; set; }
     }
 
