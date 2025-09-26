@@ -65,8 +65,8 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
     return (
         <div className="row">
             <h3 className="heading">Existing Bookings</h3>
-            <table className='table table-striped table-hover'>
-                <thead>
+            <table className='table table-striped table-hover align-items-start'>
+                <thead >
                     <tr>
                         <th>Reference No</th>
                         <th>Name</th>
@@ -126,6 +126,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                                             name="type"
                                             value={editData.type}
                                             onChange={handleEditChange}
+                                            readOnly
                                         />
                                     </td>
                                     <td>
@@ -167,10 +168,10 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                                     <td>{booking.numberOfDays}</td>
                                     <td>
                                         <span onClick={() => handleEditClick(booking)} style={{cursor:"pointer" , marginRight:"10px"}}>
-                                            <i className="bi bi-pencil-square" title="Edit"></i>
+                                            <i className="fas fa-edit" title="Edit"></i>
                                         </span>
-                                        <span onClick={() => handleDelete(booking.id)} style={{cursor:"pointer", color:"red"}}>
-                                            <i className="bi bi-trash" title="Delete"></i>
+                                        <span onClick={() => handleDelete(booking.id)} style={{cursor:"pointer"}}>
+                                            <i className="fas fa-trash-alt" title="Delete"></i>
                                         </span>
                                     </td>
                                 </>

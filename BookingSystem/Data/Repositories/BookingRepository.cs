@@ -17,6 +17,7 @@ namespace BookingSystem.Data.Repositories
         {
             return _bookings;
         }
+
         public static Booking PostBooking(List<Booking> bookingList, Booking booking)
         {
             booking.People = new Person
@@ -35,6 +36,7 @@ namespace BookingSystem.Data.Repositories
 
             return booking;
         }
+        
         public static Booking PutBooking(List<Booking> bookingList, Guid id, Booking updatedBooking)
         {
             var existingBooking = bookingList.FirstOrDefault(b => b.Id == id);

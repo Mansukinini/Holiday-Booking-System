@@ -25,73 +25,88 @@
 }
 
 .App-link {
-    color: #61dafb;
+  color: #61dafb;
 }
 
 .heading {
-    color: #428bca;
-    margin: 20px 0;
+  color: #428bca;
+  margin: 20px 0;
 }
 
 .sub-heading {
-    color: #1e1e1e !important;
-    font-size: 18px;
-    display: inline-block;
-    position: relative;
-    font-weight: 500;
+  color: #1e1e1e !important;
+  font-size: 18px;
+  display: inline-block;
+  position: relative;
+  font-weight: 500;
+}
+
+li.nav-item {
+  margin: 0 5px;
 }
 
 .div-section {
-    display: none;
+  display: none;
 }
 
 .div-section.show {
-    display: block;
-    animation: fadeDownFromNone 0.5s ease-out;
+  display: block;
+  animation: fadeDownFromNone 0.5s ease-out;
 }
 
 .section-row {
-    border: 2px solid #428bca6b;
-    margin: 20px 50px;
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
+  border: 2px solid #428bca6b;
+  margin: 20px 0px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .btn-pill {
-    border-color: #428bca;
-    border-radius: 15px;
-    margin: 5px 2px;
-    font-size: 13px;
+  border-color: #428bca;
+  border-radius: 15px;
+  margin: 5px 2px;
+  font-size: 13px;
 }
 
 .btn-pill:hover,
 .btn-square:hover {
-    background-color: #428bca;
+  background-color: #428bca;
 }
 
-.btn-pill:not(:disabled):not(.disabled).active:focus, .btn-pill:not(:disabled):not(.disabled):active:focus,
-.show>.btn-pill.dropdown-toggle:focus, .btn-pill.focus, .btn-pill:focus,
-.btn-square:not(:disabled):not(.disabled).active:focus, .btn-square:not(:disabled):not(.disabled):active:focus,
-.show>.btn-square.dropdown-toggle:focus, .btn-square.focus, .btn-square:focus {
-    box-shadow: 0 0 0 .2rem rgba(65, 155, 233, 0.5) !important;
+.btn-pill:not(:disabled):not(.disabled).active:focus,
+.btn-pill:not(:disabled):not(.disabled):active:focus,
+.show>.btn-pill.dropdown-toggle:focus,
+.btn-pill.focus,
+.btn-pill:focus,
+.btn-square:not(:disabled):not(.disabled).active:focus,
+.btn-square:not(:disabled):not(.disabled):active:focus,
+.show>.btn-square.dropdown-toggle:focus,
+.btn-square.focus,
+.btn-square:focus {
+  box-shadow: 0 0 0 .2rem rgba(65, 155, 233, 0.5) !important;
 }
 
-.btn-pill:not(:disabled):not(.disabled).active, .btn-pill:not(:disabled):not(.disabled):active, .show>.btn-pill.dropdown-toggle,
-.btn-square:not(:disabled):not(.disabled).active, .btn-square:not(:disabled):not(.disabled):active, .show>.btn-square.dropdown-toggle {
-    color: #fff;
-    background-color: #428bca;
-    border-color: #428bca;
+.btn-pill:not(:disabled):not(.disabled).active,
+.btn-pill:not(:disabled):not(.disabled):active,
+.show>.btn-pill.dropdown-toggle,
+.btn-square:not(:disabled):not(.disabled).active,
+.btn-square:not(:disabled):not(.disabled):active,
+.show>.btn-square.dropdown-toggle {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
 }
 
-tbody> tr>td>label {
-  margin-top: 8px;
+tbody>tr>td>label {
+  margin-top: 5px;
 }
 
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

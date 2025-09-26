@@ -34,19 +34,26 @@ const PersonForm = ({ bookingDetails, onBookingAdded }) => {
     return (
         <div className="section-row">
             <h5 className="sub-heading">Please fill with your detail</h5>
-            <form onSubmit={handleSubmit}>
-                <table className="table table-borderless" style={{ display: 'inline-block', width: 'auto' }}>
+            <form onSubmit={handleSubmit} style={{ margin: '1% 15%'}}>
+                <table className="table table-borderless">
                     <tbody>
-                        <tr>
+                        <tr className='text-start'>
                             <td><label>Name:</label></td>
-                            <td><input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} required /></td>
+                            <td><input type="text" className="form-control form-control-sm" value={name} onChange={e => setName(e.target.value)} required /></td>
                             <td><label>Surname:</label></td>
-                            <td><input type="text" className="form-control" value={surname} onChange={e => setSurname(e.target.value)} required /></td>
+                            <td><input type="text" className="form-control form-control-sm" value={surname} onChange={e => setSurname(e.target.value)} required /></td>
+                        </tr>
+                        <tr className='text-start'>
                             <td><label>Contact No:</label></td>
-                            <td><input type="text" className="form-control" value={contactNo} onChange={e => setContactNo(e.target.value)} required /></td>
-                            <td><label>Email:</label></td>
-                            <td><input type="text" className="form-control" value={email} onChange={e => setEmail(e.target.value)} required /></td>
-                            <td><button type="submit" className="btn btn-outline-primary btn-square">Add </button>  </td>
+                            <td><input type="text" className="form-control form-control-sm" value={contactNo} onChange={e => setContactNo(e.target.value)} required /></td>
+                            <td><label>Email Address:</label></td>
+                            <td><input type="text" className="form-control form-control-sm" value={email} onChange={e => setEmail(e.target.value)} required /></td>
+                        </tr>
+                        <tr className='text-end'>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> <button type="submit" className="btn btn-outline-primary btn-square">Submit</button></td>
                         </tr>
                     </tbody>
                 </table> 

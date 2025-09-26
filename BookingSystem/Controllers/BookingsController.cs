@@ -7,8 +7,8 @@ using BookingSystem.Data.Interfaces;
 [Route("api/[controller]")]
 public class BookingsController : ControllerBase
 {
-    private static List<Booking> _bookings = new List<Booking>();
-    /*private readonly IBookingRepository _bookingRepository;
+    private static List<Booking> _bookings = new List<Booking>();/*
+    private readonly IBookingRepository _bookingRepository;
 
     public BookingsController(IBookingRepository bookingRepository)
     {
@@ -19,8 +19,9 @@ public class BookingsController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        //var bookings = _bookingRepository.GetAllBookings();
-        //return StatusCode(200, bookings);
+        /*
+        var bookings = _bookingRepository.GetAllBookings();
+        return StatusCode(200, bookings);*/
         return Ok(_bookings);
     }
 
