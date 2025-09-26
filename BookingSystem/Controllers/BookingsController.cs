@@ -44,7 +44,7 @@ public class BookingsController : ControllerBase
 
         return BadRequest(ModelState);
     }
-
+    /*
     // PUT: api/bookings/{id}
     [HttpPut("{id}")]
     public IActionResult Put(Guid id, [FromBody] Booking updatedBooking)
@@ -69,5 +69,5 @@ public class BookingsController : ControllerBase
         }
         var result = _bookings.Remove(bookingToRemove);
         return StatusCode(200, result);
-    }
+    }*/
 }
