@@ -15,7 +15,7 @@ const PersonForm = ({ bookingDetails, onBookingAdded }) => {
             refNo: null,
             dateFrom: new Date(bookingDetails.dateFrom).toISOString(),
             dateTo: new Date(bookingDetails.dateTo).toISOString(),
-            people: { name, surname, contactNo, email },
+            person: { name, surname, contactNo, email },
             createdOn: new Date().toISOString()
         };
         

@@ -18,10 +18,10 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
         setEditId(booking.id);
         setEditData({
             refNo: booking.refNo,
-            name: booking.people.name,
-            surname: booking.people.surname,
-            email: booking.people.email,
-            contactNo: booking.people.contactNo,
+            name: booking.person.name,
+            surname: booking.person.surname,
+            email: booking.person.email,
+            contactNo: booking.person.contactNo,
             type: booking.type,
             dateFrom: booking.dateFrom.slice(0, 10),
             dateTo: booking.dateTo.slice(0, 10)
@@ -40,7 +40,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
             type: editData.type,
             dateFrom: new Date(editData.dateFrom).toISOString(),
             dateTo: new Date(editData.dateTo).toISOString(),
-            people: {
+            person: {
                 name: editData.name,
                 surname: editData.surname,
                 email: editData.email,
@@ -158,10 +158,10 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                             ) : (
                                 <>
                                     <td>{booking.refNo}</td>
-                                    <td>{booking.people.name}</td>
-                                    <td>{booking.people.surname}</td>
-                                    <td>{booking.people.email}</td>
-                                    <td>{booking.people.contactNo}</td>
+                                    <td>{booking.person.name}</td>
+                                    <td>{booking.person.surname}</td>
+                                    <td>{booking.person.email}</td>
+                                    <td>{booking.person.contactNo}</td>
                                     <td>{booking.type}</td>
                                     <td>{new Date(booking.dateFrom).toLocaleDateString()}</td>
                                     <td>{new Date(booking.dateTo).toLocaleDateString()}</td>

@@ -4,7 +4,7 @@ const InquiryBooking = ({bookingTypes, currentTabIndex, onBookingAdded }) => {
     const [dateFrom, setDateFrom] = useState('');
     const [dateTo, setDateTo] = useState('');    
     const [bookingType, setBookingType] = useState(null);
-    const [otherBookingType, setOtherBookingType] = useState(null);
+    const [otherBookingType, setOtherBookingType] = useState('');
     
     const capturedates = (e) => {
         e.preventDefault();

@@ -20,17 +20,17 @@ namespace BookingSystem.Data.Repositories
 
         public static Booking PostBooking(List<Booking> bookingList, Booking booking)
         {
-            booking.People = new Person
+            booking.Person = new Person
             {
                 Id = Guid.NewGuid(),
-                Name = booking.People.Name,
-                Surname = booking.People.Surname,
-                Email = booking.People.Email,
-                ContactNo = booking.People.ContactNo,
+                Name = booking.Person.Name,
+                Surname = booking.Person.Surname,
+                Email = booking.Person.Email,
+                ContactNo = booking.Person.ContactNo,
             };
 
             booking.Id = Guid.NewGuid();
-            booking.PersonId = booking.People.Id;
+            booking.PersonId = booking.Person.Id;
             booking.RefNo = GenerateRefNo(bookingList);
             booking.CreatedOn = DateTime.Now;
 
@@ -49,7 +49,7 @@ namespace BookingSystem.Data.Repositories
             existingBooking.RefNo = updatedBooking.RefNo;
             existingBooking.DateFrom = updatedBooking.DateFrom;
             existingBooking.DateTo = updatedBooking.DateTo;
-            existingBooking.People = updatedBooking.People;
+            existingBooking.Person = updatedBooking.Person;
             existingBooking.CreatedOn = updatedBooking.CreatedOn;
 
             return existingBooking;
