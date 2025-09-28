@@ -47,6 +47,7 @@ const BookingList = ({ bookings, onBookingDeleted }) => {
                 contactNo: editData.contactNo
             }
         };
+        
         try {
             await axios.put(`/api/Bookings/${id}`, updatedBooking);
             setEditId(null);

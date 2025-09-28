@@ -47,6 +47,10 @@ function App() {
 
     const handleBookingDeleted = () => {
         fetchBookings();
+
+        if (bookings.length === 1) {
+            setCurrentTabIndex(0);
+        }
     };
 
     const handleNewBooking = () => {
